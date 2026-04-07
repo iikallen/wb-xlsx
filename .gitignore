@@ -1,5 +1,6 @@
-node_modules/
 output/smoke/
 output/python_smoke/
 __pycache__/
 *.pyc
+.venv/
+.pytest_cache/
