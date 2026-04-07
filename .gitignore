@@ -1,2 +1,5 @@
 node_modules/
 output/smoke/
+output/python_smoke/
+__pycache__/
+*.pyc

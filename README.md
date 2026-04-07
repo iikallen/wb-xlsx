@@ -1,6 +1,8 @@
 # Wildberries Parser
 
-Минимальный CLI-парсер для `wildberries.ru`, который:
+Минимальный CLI-парсер для `wildberries.ru`, реализованный на Python.
+
+Он:
 
 - собирает полный каталог товаров по поисковому запросу;
 - сохраняет результат в `XLSX`;
@@ -22,11 +24,16 @@
 - рейтинг
 - количество отзывов
 
+## Установка
+
+```bash
+python -m pip install -r requirements.txt
+```
+
 ## Запуск
 
 ```bash
-npm install
-npm start
+python src/index.py
 ```
 
 По умолчанию используется запрос:
@@ -43,15 +50,23 @@ npm start
 ## Полезные параметры
 
 ```bash
-npm start -- --query "пальто из натуральной шерсти"
-npm start -- --dest -1257786
-npm start -- --limit 100
-npm start -- --headless false
-npm start -- --output-dir ./output
+python src/index.py --query "пальто из натуральной шерсти"
+python src/index.py --dest -1257786
+python src/index.py --limit 100
+python src/index.py --headless false
+python src/index.py --output-dir ./output
 ```
+
+## Как это работает
+
+- Браузерный шаг на `playwright` проходит антибот-проверку Wildberries и получает рабочую сессию.
+- Cookies переносятся в `requests.Session`, после чего каталог и карточки забираются через внутренние JSON API.
+- Описание и структурированные характеристики берутся из `card.json` на `wbbasket`.
+- `XLSX` создаются через `openpyxl`.
 
 ## Примечания
 
 - По умолчанию скрипт запускает обычный браузер Edge/Chrome, потому что у Wildberries есть антибот-проверка.
 - Для характеристик используется структурированный JSON из `card.json`, чтобы не терять группировку полей.
 - `dest=-1257786` соответствует российской выдаче.
+- В проекте сохранена и Node-версия, но основной рабочий сценарий теперь на Python: [src/index.py](src/index.py).
